@@ -72,14 +72,10 @@ let parse_json =
         ; Sexp.List
             [ Sexp.Atom "action"
             ; Sexp.List
-                [ Sexp.Atom "ignore-stdout"
-                ; Sexp.List
-                    [ Sexp.Atom "ignore-stderr"
-                    ; Sexp.List
-                        [ Sexp.Atom "chdir"
-                        ; Sexp.Atom executable_dir
-                        ; Sexp.List ([Sexp.Atom "run"] @ make_sexp_params_list)
-                        ] ] ] ] ] )
+                [ Sexp.Atom "chdir"
+                ; Sexp.Atom executable_dir
+                ; Sexp.List ([Sexp.Atom "run"] @ make_sexp_params_list)
+    ] ] ] )
   in
   let config_json = Yojson.Basic.from_file run_config in
   let wrappers = config_json |> member "wrappers" |> convert_each to_wrapper in
